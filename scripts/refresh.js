@@ -2,7 +2,6 @@ import fetch from 'node-fetch';
 import logSymbols from 'log-symbols';
 import cliProgress from 'cli-progress';
 import * as path from 'path';
-import axios from 'axios';
 import * as fs from 'fs';
 import unzipper from 'unzipper';
 import { capitalize } from '@mui/material';
@@ -43,19 +42,17 @@ const downloadSourceZIP = (url) => {
 	return new Promise(async (resolve) => {
 		log(`${logSymbols.info} Downloading icons...`);
 
-		const stream = await axios({
-			method: 'get',
-			url,
-			responseType: 'stream',
-			httpsAgent: agent,
+		const response = await fetch(url, {
+			agent,
 		});
 		const progress = multibar.create(0, 0, {}, {
 			format: '[{bar}] | {value} MB',
 		});
 		const dest = fs.createWriteStream(outputPath);
+
 		let downloaded = 0;
 
-		stream.data
+		response.body
 			.on('end', () => {
 				log(`${logSymbols.success} Finished downloading icons`);
 				multibar.remove(progress);
