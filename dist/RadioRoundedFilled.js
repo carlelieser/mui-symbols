@@ -1,0 +1,8 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(require("react"));
+const material_1 = require("@mui/material");
+exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M140-80q-24 0-42-18t-18-42v-554l521-210q10.585-5 20.793-.5Q632-900 636-889t-.18 21.125Q631.64-857.75 621-854L286-720h534q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm179.183-123Q360-203 388-231.183q28-28.183 28-69T387.817-369q-28.183-28-69-28T250-368.817q-28 28.183-28 69T250.183-231q28.183 28 69 28ZM140-510h520v-30.175q0-12.825 8.675-21.325 8.676-8.5 21.5-8.5 12.825 0 21.325 8.625T720-540v30h100v-150H140v150Z" }), "RadioRoundedFilled");

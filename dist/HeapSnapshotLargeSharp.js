@@ -1,0 +1,8 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(require("react"));
+const material_1 = require("@mui/material");
+exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M580.5-230q20.5 0 35-15t14.5-35.5q0-20.5-14.583-35Q600.833-330 580-330q-20 0-35 14.583-15 14.584-15 35.417 0 20 15 35t35.5 15ZM378-236l246-246-42-42-246 246 42 42Zm2.5-194q20.5 0 35-15t14.5-35.5q0-20.5-14.583-35Q400.833-530 380-530q-20 0-35 14.583-15 14.584-15 35.417 0 20 15 35t35.5 15ZM160-80v-800h421l219 219v581H160Zm391-554v-186H220v680h520v-494H551ZM220-820v186-186 680-680Z" }), "HeapSnapshotLargeSharp");
