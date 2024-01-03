@@ -7,10 +7,8 @@ import unzipper from 'unzipper';
 import { capitalize } from '@mui/material';
 import { fileURLToPath } from 'url';
 import converter from 'number-to-words';
-import { HttpsProxyAgent } from 'https-proxy-agent';
 import { rmdir } from './utils.js';
 
-const agent = null;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -33,7 +31,7 @@ const log = (message) => {
 };
 
 const getReleaseAssetsURL = () => {
-	return fetch(releasesURL, { agent })
+	return fetch(releasesURL)
 		.then((response) => response.json())
 		.then((data) => data.zipball_url);
 };
@@ -42,9 +40,7 @@ const downloadSourceZIP = (url) => {
 	return new Promise(async (resolve) => {
 		log(`${logSymbols.info} Downloading icons...`);
 
-		const response = await fetch(url, {
-			agent,
-		});
+		const response = await fetch(url);
 		const progress = multibar.create(0, 0, {}, {
 			format: '[{bar}] | {value} MB',
 		});
@@ -67,13 +63,13 @@ const downloadSourceZIP = (url) => {
 };
 
 const getIconStyles = () => {
-	return fetch(styleCountSourceURL, { agent })
+	return fetch(styleCountSourceURL)
 		.then(response => response.json())
 		.then((entries) => entries.filter((entry) => entry.type === 'dir').map((entry) => entry.name));
 };
 
 const getDefaultIcons = () => {
-	return fetch(iconCountSourceURL, { agent })
+	return fetch(iconCountSourceURL)
 		.then(response => response.json())
 		.then((entries) => entries.tree.filter(item => item.path.startsWith(iconCountSourcePath)));
 };
