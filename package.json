@@ -1,7 +1,7 @@
 {
   "name": "mui-symbols",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Google's Material Symbols icon library for use with MUI.",
   "main": "dist/index.js",
   "scripts": {
@@ -17,6 +17,9 @@
     "mui",
     "mui-symbols"
   ],
+  "repository": {
+    "url": "https://github.com/carlelieser/mui-symbols"
+  },
   "author": "Carlos E. Santos",
   "license": "MIT",
   "dependencies": {
