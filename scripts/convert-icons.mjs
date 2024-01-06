@@ -13,6 +13,7 @@ import fg from 'fast-glob';
 import fs from 'fs-extra';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import PQueue from 'p-queue';
 
 const argv = yargs(hideBin(process.argv)).option('extension', {
 	alias: 'ext',
@@ -27,6 +28,8 @@ const __dirname = path.dirname(__filename);
 
 const templatePath = path.join(__dirname, '..', 'template.js');
 const srcPath = path.join(__dirname, '..', 'src');
+
+const queue = new PQueue({ concurrency: 8 });
 
 const getIconFiles = () => fg(`icons/*.${ext}`);
 
@@ -45,7 +48,7 @@ const toTSX = async (filePath) => {
 
 const generateComponents = async () => {
 	const files = await getIconFiles();
-	await Promise.all(files.map(toTSX));
+	await queue.addAll(files.map(path => () => toTSX(path)));
 };
 
 const generateIndex = async () => {
