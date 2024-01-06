@@ -17,7 +17,7 @@ const argv = yargs(hideBin(process.argv))
 	.option("repo", {
 		alias: "r",
 		describe:
-			'GitHub repo to extract icons from, i.e "marella/material-symbols".',
+			"GitHub repo to extract icons from, i.e \"marella/material-symbols\".",
 		type: "string",
 	})
 	.option("output", {
@@ -34,7 +34,7 @@ const argv = yargs(hideBin(process.argv))
 	.option("sub-dir", {
 		alias: "s",
 		describe:
-			'The sub-directory within the repo where icons should be grabbed from. Default is "svg/400"',
+			"The sub-directory within the repo where icons should be grabbed from. Default is \"svg/400\"",
 		type: "string",
 	}).argv;
 

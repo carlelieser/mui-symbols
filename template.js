@@ -1,3 +1,3 @@
-import { createSvgIcon } from '@mui/material';
+import createSvgIcon from "./create-svg-icon.js";
 
-export default createSvgIcon(<path d="{{d}}"/>, "{{name}}")
+export default createSvgIcon({{{paths}}}, '{{componentName}}');
