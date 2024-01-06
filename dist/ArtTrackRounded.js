@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M100-200q-24 0-42-18t-18-42v-440q0-24 18-42t42-18h440q24 0 42 18t18 42v440q0 24-18 42t-42 18H100Zm0-60h440v-440H100v440Zm196-120-48-66q-5-6-12-6t-12 6l-50 65q-6 8-1.32 16t13.32 8h265q8.5 0 12.75-8t-.75-16l-70-93q-5-6-12-6t-12 6l-73 94Zm433.825 180Q717-200 708.5-208.625T700-230v-500q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T760-730v500q0 12.75-8.675 21.375-8.676 8.625-21.5 8.625Zm160 0Q877-200 868.5-208.625T860-230v-500q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T920-730v500q0 12.75-8.675 21.375-8.676 8.625-21.5 8.625ZM100-260v-440 440Z" }), "ArtTrackRounded");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M100-200q-24 0-42-18t-18-42v-440q0-24 18-42t42-18h440q24 0 42 18t18 42v440q0 24-18 42t-42 18H100Zm0-60h440v-440H100v440Zm196-120-48-66q-5-6-12-6t-12 6l-50 65q-6 8-1.32 16t13.32 8h265q8.5 0 12.75-8t-.75-16l-70-93q-5-6-12-6t-12 6l-73 94Zm433.825 180Q717-200 708.5-208.625T700-230v-500q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T760-730v500q0 12.75-8.675 21.375-8.676 8.625-21.5 8.625Zm160 0Q877-200 868.5-208.625T860-230v-500q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T920-730v500q0 12.75-8.675 21.375-8.676 8.625-21.5 8.625ZM100-260v-440 440Z"
+}), "ArtTrackRounded");

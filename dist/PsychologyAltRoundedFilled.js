@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M270-80q-13 0-21.5-8.5T240-110v-142q-57-52-88.5-121.5T120-520q0-150 105-255t255-105q125 0 221.5 73.5T827-615l55 218q4 14-5 25.5T853-360h-93v140q0 25-17.5 42.5T700-160H600v50q0 13-8.5 21.5T570-80H270Zm210-240q17 0 28.5-11.5T520-360q0-17-11.5-28.5T480-400q-17 0-28.5 11.5T440-360q0 17 11.5 28.5T480-320Zm1-128q11 0 20.5-7.5T514-476q3-12 9.5-23.5T544-526q32-35 42-53t10-41q0-42-32.5-71T483-720q-31 0-58 14t-44 39q-8 11-4 24t16 18q11 5 21.5 1.5T433-638q10-12 23-18.5t27-6.5q22 0 36.5 12t14.5 31q0 16-8.5 30.5T492-549q-19 20-27.5 35.5T453-478q-2 12 6.5 21t21.5 9Z" }), "PsychologyAltRoundedFilled");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M270-80q-13 0-21.5-8.5T240-110v-142q-57-52-88.5-121.5T120-520q0-150 105-255t255-105q125 0 221.5 73.5T827-615l55 218q4 14-5 25.5T853-360h-93v140q0 25-17.5 42.5T700-160H600v50q0 13-8.5 21.5T570-80H270Zm210-240q17 0 28.5-11.5T520-360q0-17-11.5-28.5T480-400q-17 0-28.5 11.5T440-360q0 17 11.5 28.5T480-320Zm1-128q11 0 20.5-7.5T514-476q3-12 9.5-23.5T544-526q32-35 42-53t10-41q0-42-32.5-71T483-720q-31 0-58 14t-44 39q-8 11-4 24t16 18q11 5 21.5 1.5T433-638q10-12 23-18.5t27-6.5q22 0 36.5 12t14.5 31q0 16-8.5 30.5T492-549q-19 20-27.5 35.5T453-478q-2 12 6.5 21t21.5 9Z"
+}), "PsychologyAltRoundedFilled");

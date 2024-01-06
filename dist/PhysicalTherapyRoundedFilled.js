@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M609-73q8 3 15 2t13-5q6-4 9.5-10.5T650-101v-169q0-13-8.5-21.5T620-300H375q-26 0-42.5 16T312-247q-4 21 5.5 42t35.5 31L609-73Zm160-447q29 0 50 21t21 51q0 23-13.5 41T791-383l-81 23H375q-52 0-88.5 36.5T250-235q0 20 7 39t20 36H150q-13 0-21.5-8.5T120-190v-130q0-83 58.5-141.5T320-520h449ZM400-880q66 0 113 47t47 113q0 66-47 113t-113 47q-66 0-113-47t-47-113q0-66 47-113t113-47Z" }), "PhysicalTherapyRoundedFilled");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M609-73q8 3 15 2t13-5q6-4 9.5-10.5T650-101v-169q0-13-8.5-21.5T620-300H375q-26 0-42.5 16T312-247q-4 21 5.5 42t35.5 31L609-73Zm160-447q29 0 50 21t21 51q0 23-13.5 41T791-383l-81 23H375q-52 0-88.5 36.5T250-235q0 20 7 39t20 36H150q-13 0-21.5-8.5T120-190v-130q0-83 58.5-141.5T320-520h449ZM400-880q66 0 113 47t47 113q0 66-47 113t-113 47q-66 0-113-47t-47-113q0-66 47-113t113-47Z"
+}), "PhysicalTherapyRoundedFilled");

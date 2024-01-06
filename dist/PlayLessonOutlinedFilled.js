@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M270-820v278l96-59 96 59v-278H270ZM727.774-40Q648-40 592-96.226t-56-136Q536-312 592-368t137-56q79.265 0 135.133 56.226Q920-311.548 920-231.774T863.774-96q-56.226 56-136 56ZM679-140l143-92-143-92v184Zm-203-92.268Q476-190 486.5-150.5T522-79H180q-24.75 0-42.375-17.625T120-139v-681q0-24.75 17.625-42.375T180-880h520q24.75 0 42.375 17.625T760-820v339q-7.814-1-15.628-1.5t-15.628-.5q-104.558 0-178.651 73.138T476-232.268Z" }), "PlayLessonOutlinedFilled");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M270-820v278l96-59 96 59v-278H270ZM727.774-40Q648-40 592-96.226t-56-136Q536-312 592-368t137-56q79.265 0 135.133 56.226Q920-311.548 920-231.774T863.774-96q-56.226 56-136 56ZM679-140l143-92-143-92v184Zm-203-92.268Q476-190 486.5-150.5T522-79H180q-24.75 0-42.375-17.625T120-139v-681q0-24.75 17.625-42.375T180-880h520q24.75 0 42.375 17.625T760-820v339q-7.814-1-15.628-1.5t-15.628-.5q-104.558 0-178.651 73.138T476-232.268Z"
+}), "PlayLessonOutlinedFilled");

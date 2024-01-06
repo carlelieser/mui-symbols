@@ -30,10 +30,9 @@ const generateTSFiles = async () => {
 		const svg = await fs.promises.readFile(icon.path, { encoding: 'utf-8' });
 		const data = await parse(svg);
 		const d = data.children?.[0].attributes.d;
-		await fs.promises.writeFile(path.join(targetPath, icon.name + '.ts'), `
-		import React from "react"; 
+		await fs.promises.writeFile(path.join(targetPath, icon.name + '.tsx'), `
 		import { createSvgIcon } from '@mui/material';
-		export default createSvgIcon(React.createElement("path", {  d: "${d}" }), "${icon.name}")`, { encoding: 'utf-8' });
+		export default createSvgIcon(<path d="${d}"/>, "${icon.name}")`, { encoding: 'utf-8' });
 	}
 	bar.stop();
 	console.log(logSymbols.success, 'Icon components generated');

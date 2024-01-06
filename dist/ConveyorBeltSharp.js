@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M201-120q-50 0-85-35t-35-85q0-50 35-85t85-35h560q50 0 85 35t35 85q0 50-35 85t-85 35H201Zm0-60h560q25.5 0 42.75-17.25T821-240q0-25.5-17.25-42.75T761-300H201q-25.5 0-42.75 17.25T141-240q0 25.5 17.25 42.75T201-180Zm160-260v-400h400v400H361Zm60-60h280v-280H421v280ZM79-530v-60h221v60H79Zm401-120h162v-60H480v60Zm-319 0h147v-60H161v60Zm260 150v-280 280Z" }), "ConveyorBeltSharp");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M201-120q-50 0-85-35t-35-85q0-50 35-85t85-35h560q50 0 85 35t35 85q0 50-35 85t-85 35H201Zm0-60h560q25.5 0 42.75-17.25T821-240q0-25.5-17.25-42.75T761-300H201q-25.5 0-42.75 17.25T141-240q0 25.5 17.25 42.75T201-180Zm160-260v-400h400v400H361Zm60-60h280v-280H421v280ZM79-530v-60h221v60H79Zm401-120h162v-60H480v60Zm-319 0h147v-60H161v60Zm260 150v-280 280Z"
+}), "ConveyorBeltSharp");

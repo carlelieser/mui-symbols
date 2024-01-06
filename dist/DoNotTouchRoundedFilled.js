@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M402-40q-27 0-51.5-12.5T311-88L68-446q-6-9-4-20t10-18q17-15 39.5-19t44.573 13.188L280-397v-197L47-827q-9-9.067-9-21.533Q38-861 47.053-870q9.052-9 21.5-9Q81-879 90-870l765 765q9 9 8.5 21t-9.553 21q-9.052 9-21.5 9Q820-54 811-63l-18-18q-20 19-46.56 30Q719.88-40 690-40H402Zm438-166L566-480h48v-370q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T674-850v370h106v-290q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T840-770v564ZM507-539l-60-59v-292q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T507-890v351ZM340-705l-60-60v-45q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T340-810v105Z" }), "DoNotTouchRoundedFilled");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M402-40q-27 0-51.5-12.5T311-88L68-446q-6-9-4-20t10-18q17-15 39.5-19t44.573 13.188L280-397v-197L47-827q-9-9.067-9-21.533Q38-861 47.053-870q9.052-9 21.5-9Q81-879 90-870l765 765q9 9 8.5 21t-9.553 21q-9.052 9-21.5 9Q820-54 811-63l-18-18q-20 19-46.56 30Q719.88-40 690-40H402Zm438-166L566-480h48v-370q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T674-850v370h106v-290q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T840-770v564ZM507-539l-60-59v-292q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T507-890v351ZM340-705l-60-60v-45q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T340-810v105Z"
+}), "DoNotTouchRoundedFilled");

@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M62-889 894-57l-42 42-105-105H180q-24 0-42-18t-18-42v-567L20-847l42-42Zm302 415L180-290v110h506L555-311l-14 14-177-177ZM180-687v312l156-156-156-156Zm16-153h584q24 0 42 18t18 42v584l-60-60v-280L640-396l-42-43 182-182v-159H256l-60-60Zm402 401Zm-153 18ZM336-531Zm17 68Zm163-57Z" }), "BidLandscapeDisabledOutlined");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M62-889 894-57l-42 42-105-105H180q-24 0-42-18t-18-42v-567L20-847l42-42Zm302 415L180-290v110h506L555-311l-14 14-177-177ZM180-687v312l156-156-156-156Zm16-153h584q24 0 42 18t18 42v584l-60-60v-280L640-396l-42-43 182-182v-159H256l-60-60Zm402 401Zm-153 18ZM336-531Zm17 68Zm163-57Z"
+}), "BidLandscapeDisabledOutlined");

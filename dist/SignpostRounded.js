@@ -1,8 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
-const material_1 = require("@mui/material");
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement("path", { d: "M450-110v-160H255q-12.444 0-23.722-5T212-288l-71-71q-9-9-9-21t9-21l71-71q8-8 19.278-13 11.278-5 23.722-5h195v-90H190q-12.75 0-21.375-8.625T160-610v-160q0-12.75 8.625-21.375T190-800h260v-50q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T510-850v50h195q12.444 0 23.722 5T748-782l71 71q9 9 9 21t-9 21l-71 71q-8 8-19.278 13-11.278 5-23.722 5H510v90h260q12.75 0 21.375 8.625T800-460v160q0 12.75-8.625 21.375T770-270H510v160q0 12.75-8.675 21.375Q492.649-80 479.825-80 467-80 458.5-88.625T450-110ZM220-640h485l50-50-50-50H220v100Zm35 310h485v-100H255l-50 50 50 50Zm-35-310v-100 100Zm520 310v-100 100Z" }), "SignpostRounded");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M450-110v-160H255q-12.444 0-23.722-5T212-288l-71-71q-9-9-9-21t9-21l71-71q8-8 19.278-13 11.278-5 23.722-5h195v-90H190q-12.75 0-21.375-8.625T160-610v-160q0-12.75 8.625-21.375T190-800h260v-50q0-12.75 8.675-21.375 8.676-8.625 21.5-8.625 12.825 0 21.325 8.625T510-850v50h195q12.444 0 23.722 5T748-782l71 71q9 9 9 21t-9 21l-71 71q-8 8-19.278 13-11.278 5-23.722 5H510v90h260q12.75 0 21.375 8.625T800-460v160q0 12.75-8.625 21.375T770-270H510v160q0 12.75-8.675 21.375Q492.649-80 479.825-80 467-80 458.5-88.625T450-110ZM220-640h485l50-50-50-50H220v100Zm35 310h485v-100H255l-50 50 50 50Zm-35-310v-100 100Zm520 310v-100 100Z"
+}), "SignpostRounded");

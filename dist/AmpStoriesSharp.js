@@ -1,8 +1,10 @@
-'use strict';
-var __importDefault = (this && this.__importDefault) || function(mod) {
-	return (mod && mod.__esModule) ? mod : { 'default': mod };
-};
-Object.defineProperty(exports, '__esModule', { value: true });
-const react_1 = __importDefault(require('react'));
-const material_1 = require('@mui/material');
-exports.default = (0, material_1.createSvgIcon)(react_1.default.createElement('path', { d: 'M280-160v-640h400v640H280Zm-160-80v-480h60v480h-60Zm660 0v-480h60v480h-60Zm-440 20h280v-520H340v520Zm0 0v-520 520Z' }), 'AmpStoriesSharp');
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var jsx_runtime_1 = require("react/jsx-runtime");
+var material_1 = require("@mui/material");
+exports["default"] = (0, material_1.createSvgIcon)((0, jsx_runtime_1.jsx)("path", {
+  d: "M280-160v-640h400v640H280Zm-160-80v-480h60v480h-60Zm660 0v-480h60v480h-60Zm-440 20h280v-520H340v520Zm0 0v-520 520Z"
+}), "AmpStoriesSharp");
