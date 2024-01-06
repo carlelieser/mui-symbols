@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf ./dist",
+    "format": "prettier ./scripts --write",
     "download": "node scripts/download.mjs",
     "convert-icons": "node scripts/convert-icons.mjs",
     "build": "cross-env NODE_OPTIONS='--max-old-space-size=8192' tsc",
