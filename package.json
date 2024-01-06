@@ -1,7 +1,7 @@
 {
   "name": "mui-symbols",
   "version": "1.0.7",
-  "description": "Material UI icon components for Material Symbols.",
+  "description": "MUI icon components for Material Symbols.",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf ./dist",
