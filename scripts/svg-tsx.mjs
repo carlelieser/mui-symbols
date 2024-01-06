@@ -27,8 +27,7 @@ const utilDestPath = path.join(destPath, utilName);
 
 const queue = new PQueue({ concurrency: 8 });
 
-const cleanPaths = (data) => {
-	// Remove hardcoded color fill before optimizing so that empty groups are removed
+const cleanPaths = data => {
 	const input = data
 		.replace(/ fill="#010101"/g, "")
 		.replace(/<rect fill="none" width="24" height="24"\/>/g, "")
@@ -62,7 +61,6 @@ const cleanPaths = (data) => {
 			{
 				name: "removeUselessStrokeAndFill",
 				params: {
-					// https://github.com/svg/svgo/issues/727#issuecomment-303115276
 					removeNone: true,
 				},
 			},
@@ -85,7 +83,6 @@ const cleanPaths = (data) => {
 		],
 	});
 
-	// True if the svg has multiple children
 	let childrenAsArray = false;
 	const jsxResult = svgo.optimize(result.data, {
 		plugins: [
@@ -97,19 +94,23 @@ const cleanPaths = (data) => {
 							enter(root) {
 								const [svg, ...rootChildren] = root.children;
 								if (rootChildren.length > 0) {
-									throw new Error("Expected a single child of the root");
+									throw new Error(
+										"Expected a single child of the root"
+									);
 								}
-								if (svg.type !== "element" || svg.name !== "svg") {
-									throw new Error("Expected an svg element as the root child");
+								if (
+									svg.type !== "element" ||
+									svg.name !== "svg"
+								) {
+									throw new Error(
+										"Expected an svg element as the root child"
+									);
 								}
 
 								if (svg.children.length > 1) {
 									childrenAsArray = true;
 									svg.children.forEach((svgChild, index) => {
 										svgChild.attributes.key = index;
-										// Original name will be restored later
-										// We just need a mechanism to convert the resulting
-										// svg string into an array of JSX elements
 										svgChild.name = `SVGChild:${svgChild.name}`;
 									});
 								}
@@ -123,28 +124,26 @@ const cleanPaths = (data) => {
 		],
 	});
 
-	// Extract the paths from the svg string
-	// Clean xml paths
-	// TODO: Implement as svgo plugins instead
 	let paths = jsxResult.data
-		.replace(/"\/>/g, "\" />")
+		.replace(/"\/>/g, '" />')
 		.replace(/fill-opacity=/g, "fillOpacity=")
 		.replace(/xlink:href=/g, "xlinkHref=")
 		.replace(/clip-rule=/g, "clipRule=")
 		.replace(/fill-rule=/g, "fillRule=")
-		.replace(/ clip-path=".+?"/g, "") // Fix visibility issue and save some bytes.
-		.replace(/<clipPath.+?<\/clipPath>/g, ""); // Remove unused definitions
+		.replace(/ clip-path=".+?"/g, "")
+		.replace(/<clipPath.+?<\/clipPath>/g, "");
 
 	const size = 960;
-	const scale = Math.round((24 / size) * 100) / 100; // Keep a maximum of 2 decimals
-	paths = paths.replace('clipPath="url(#b)" ', '');
-	paths = paths.replace(/<path /g, `<path transform="scale(${scale}, ${scale})" `);
+	const scale = Number(24 / size).toFixed(4);
+	paths = paths.replace('clipPath="url(#b)" ', "");
+	paths = paths.replace(
+		/<path /g,
+		`<path transform="scale(${scale}, ${scale})" `
+	);
 
 	if (childrenAsArray) {
 		const pathsCommaSeparated = paths
-			// handle self-closing tags
 			.replace(/key="\d+" \/>/g, "$&,")
-			// handle the rest
 			.replace(/<\/SVGChild:(\w+)>/g, "</$1>,");
 		paths = `[${pathsCommaSeparated}]`;
 	}
@@ -162,7 +161,9 @@ const toTSX = async filePath => {
 	const data = await fs.readFile(filePath, { encoding: "utf-8" });
 	const paths = cleanPaths(data);
 	const template = await getTemplate();
-	const content = template.replace("{{{paths}}}", paths).replace("{{componentName}}", name);
+	const content = template
+		.replace("{{{paths}}}", paths)
+		.replace("{{componentName}}", name);
 	const outPath = path.join(destPath, name + ".tsx");
 	await fs.outputFile(outPath, content, { encoding: "utf-8" });
 };
