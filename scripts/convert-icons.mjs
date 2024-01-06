@@ -1,3 +1,11 @@
+/**
+ * This script automates the conversion of SVG icons to TSX components. It takes an optional 'extension'
+ * parameter to specify the icon file type. The script reads SVG files from the 'icons' directory, parses
+ * them, and uses a template to generate corresponding TSX files in the 'src' directory. It also creates
+ * an index file in 'src' for easy export of all components. The script also ensures that the 'src' directory
+ * is emptied before generating new components.
+ */
+
 import path from 'path';
 import { parse } from 'svgson';
 import { fileURLToPath } from 'url';
@@ -6,9 +14,13 @@ import fs from 'fs-extra';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const argv = yargs(hideBin(process.argv)).argv;
+const argv = yargs(hideBin(process.argv)).option('extension', {
+	alias: 'ext',
+	description: 'The icon extension to match against.',
+	type: 'string',
+}).argv;
 
-const ext = argv.ext ?? "svg";
+const ext = argv.extension ?? 'svg';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
