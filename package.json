@@ -1,16 +1,16 @@
 {
   "name": "mui-symbols",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Google's Material Symbols icon library for use with MUI.",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf ./dist",
     "format": "prettier ./scripts --write",
     "download": "node scripts/download.mjs",
-    "convert-icons": "node scripts/convert-icons.mjs",
+    "svg-tsx": "node scripts/svg-tsx.mjs",
     "build": "cross-env NODE_OPTIONS='--max-old-space-size=8192' tsc",
     "clean-build": "npm run clean && npm run build",
-    "update": "npm run download && npm run convert-icons && npm run clean-build"
+    "update": "npm run download && npm run svg-tsx && npm run clean-build"
   },
   "keywords": [
     "material-symbols",
@@ -39,7 +39,7 @@
     "number-to-words": "^1.2.4",
     "p-queue": "^8.0.1",
     "prettier": "^3.1.1",
-    "svgson": "^5.3.1",
+    "svgo": "^3.2.0",
     "typescript": "^5.3.3",
     "unzipper": "^0.10.14",
     "yargs": "^17.7.2"
