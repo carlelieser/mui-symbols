@@ -1,6 +1,6 @@
 {
   "name": "mui-symbols",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Google's Material Symbols icon library for use with MUI.",
   "main": "dist/index.js",
   "scripts": {

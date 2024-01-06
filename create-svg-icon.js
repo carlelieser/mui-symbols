@@ -20,7 +20,7 @@ const createSvgIcon = (path, displayName) => {
 				}
 			});
 
-			if (ref.current) {
+			if (ref?.current) {
 				resizeObserver.observe(ref.current);
 			}
 
