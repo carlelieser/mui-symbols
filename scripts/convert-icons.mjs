@@ -6,44 +6,44 @@
  * is emptied before generating new components.
  */
 
-import path from 'path';
-import { parse } from 'svgson';
-import { fileURLToPath } from 'url';
-import fg from 'fast-glob';
-import fs from 'fs-extra';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
-import PQueue from 'p-queue';
+import path from "path";
+import { parse } from "svgson";
+import { fileURLToPath } from "url";
+import fg from "fast-glob";
+import fs from "fs-extra";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+import PQueue from "p-queue";
 
-const argv = yargs(hideBin(process.argv)).option('extension', {
-	alias: 'ext',
-	description: 'The icon extension to match against.',
-	type: 'string',
+const argv = yargs(hideBin(process.argv)).option("extension", {
+	alias: "ext",
+	description: "The icon extension to match against.",
+	type: "string",
 }).argv;
 
-const ext = argv.extension ?? 'svg';
+const ext = argv.extension ?? "svg";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const templatePath = path.join(__dirname, '..', 'template.js');
-const srcPath = path.join(__dirname, '..', 'src');
+const templatePath = path.join(__dirname, "..", "template.js");
+const srcPath = path.join(__dirname, "..", "src");
 
 const queue = new PQueue({ concurrency: 8 });
 
 const getIconFiles = () => fg(`icons/*.${ext}`);
 
-const getTemplate = () => fs.readFile(templatePath, { encoding: 'utf-8' });
+const getTemplate = () => fs.readFile(templatePath, { encoding: "utf-8" });
 
-const toTSX = async (filePath) => {
+const toTSX = async filePath => {
 	const name = path.basename(filePath, `.${ext}`);
-	const svg = await fs.readFile(filePath, { encoding: 'utf-8' });
+	const svg = await fs.readFile(filePath, { encoding: "utf-8" });
 	const parsedSVG = await parse(svg);
 	const d = parsedSVG.children?.[0].attributes.d;
 	const template = await getTemplate();
-	const data = template.replace('{{d}}', d).replace('{{name}}', name);
-	const outPath = path.join(srcPath, name + '.tsx');
-	await fs.outputFile(outPath, data, { encoding: 'utf-8' });
+	const data = template.replace("{{d}}", d).replace("{{name}}", name);
+	const outPath = path.join(srcPath, name + ".tsx");
+	await fs.outputFile(outPath, data, { encoding: "utf-8" });
 };
 
 const generateComponents = async () => {
@@ -54,9 +54,11 @@ const generateComponents = async () => {
 const generateIndex = async () => {
 	const files = await getIconFiles();
 	const names = files.map(filePath => path.basename(filePath, `.${ext}`));
-	const content = names.map(name => `export { default as ${name} } from "./${name}";`).join('\n');
-	const outPath = path.join(srcPath, 'index.ts');
-	await fs.outputFile(outPath, content, { encoding: 'utf-8' });
+	const content = names
+		.map(name => `export { default as ${name} } from "./${name}";`)
+		.join("\n");
+	const outPath = path.join(srcPath, "index.ts");
+	await fs.outputFile(outPath, content, { encoding: "utf-8" });
 };
 
 const run = async () => {
