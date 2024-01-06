@@ -1,14 +1,15 @@
 {
   "name": "mui-symbols",
-  "type": "module",
   "version": "1.0.2",
   "description": "Google's Material Symbols icon library for use with MUI.",
   "main": "dist/index.js",
   "scripts": {
-    "refresh": "node scripts/refresh.js",
-    "build": "node scripts/build.js",
-    "dist": "rimraf ./dist && cross-env NODE_OPTIONS='--max-old-space-size=8192' tsc && cross-env NODE_OPTIONS='--max-old-space-size=8192' babel dist --out-dir dist",
-    "update": "npm run refresh && npm run build && npm run dist"
+    "clean": "rimraf ./dist",
+    "download": "node scripts/download.mjs",
+    "convert-icons": "node scripts/convert-icons.mjs",
+    "build": "cross-env NODE_OPTIONS='--max-old-space-size=8192' tsc",
+    "clean-build": "npm run clean && npm run build",
+    "update": "npm run download && npm run convert-icons && npm run clean-build"
   },
   "keywords": [
     "material-symbols",
@@ -29,22 +30,16 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.4",
-    "@babel/core": "^7.23.7",
-    "@babel/plugin-transform-runtime": "^7.23.7",
-    "@babel/preset-env": "^7.23.7",
-    "@babel/preset-react": "^7.23.3",
-    "@babel/preset-typescript": "^7.23.3",
-    "@babel/runtime": "^7.23.7",
-    "cli-progress": "^3.12.0",
+    "@types/node": "^20.10.6",
     "cross-env": "^7.0.3",
-    "log-symbols": "^6.0.0",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
     "node-fetch": "^3.3.2",
     "number-to-words": "^1.2.4",
     "prettier": "^3.1.1",
     "svgson": "^5.3.1",
-    "tslib": "^2.6.2",
     "typescript": "^5.3.3",
-    "unzipper": "^0.10.14"
+    "unzipper": "^0.10.14",
+    "yargs": "^17.7.2"
   }
 }
