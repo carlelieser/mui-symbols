@@ -135,6 +135,11 @@ const cleanPaths = (data) => {
 		.replace(/ clip-path=".+?"/g, "") // Fix visibility issue and save some bytes.
 		.replace(/<clipPath.+?<\/clipPath>/g, ""); // Remove unused definitions
 
+	const size = 960;
+	const scale = Math.round((24 / size) * 100) / 100; // Keep a maximum of 2 decimals
+	paths = paths.replace('clipPath="url(#b)" ', '');
+	paths = paths.replace(/<path /g, `<path transform="scale(${scale}, ${scale})" `);
+
 	if (childrenAsArray) {
 		const pathsCommaSeparated = paths
 			// handle self-closing tags
