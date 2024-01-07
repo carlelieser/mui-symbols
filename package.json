@@ -1,6 +1,6 @@
 {
   "name": "mui-symbols",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "MUI icon components for Material Symbols.",
   "main": "dist/index.js",
   "scripts": {
