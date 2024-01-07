@@ -8,10 +8,10 @@ import fetch from "node-fetch";
 import * as path from "path";
 import unzipper from "unzipper";
 import { fileURLToPath } from "url";
-import converter from "number-to-words";
 import fs from "fs-extra";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import { replaceNumbersWithWords, toPascalCase } from "./utils.mjs";
 
 const argv = yargs(hideBin(process.argv))
 	.option("repo", {
@@ -52,7 +52,7 @@ const releasesURL = `https://api.github.com/repos/${repo}/releases/latest`;
 const zipFileName = "download.zip";
 const zipFileOutPath = path.join(outDir, zipFileName);
 
-const getReleaseAssetsURL = () => {
+const getZipBallUrl = () => {
 	return fetch(releasesURL)
 		.then(response => response.json())
 		.then(data => data.zipball_url);
@@ -64,46 +64,6 @@ const downloadSourceZip = url => {
 		const dest = fs.createWriteStream(zipFileOutPath);
 		response.body.on("end", resolve).pipe(dest);
 	});
-};
-
-const capitalizeFirstLetterAfterNumberGroup = string => {
-	const chars = string.split("");
-	for (let i = 0; i < chars.length; i++) {
-		const char = chars[i];
-		if (i === 0) continue;
-		if (
-			Number.isNaN(Number(char)) &&
-			!Number.isNaN(Number(chars?.[i - 1]))
-		) {
-			chars[i] = char.toUpperCase();
-		}
-	}
-	return chars.join("");
-};
-
-const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
-
-const toPascalCase = string =>
-	string
-		.trim()
-		.split(/\W/)
-		.map(item => capitalize(item))
-		.join("");
-
-const replaceNumbersWithWords = string => {
-	const prepped = capitalizeFirstLetterAfterNumberGroup(string);
-	const matches = Array.from(string.matchAll(/\d+/g), match => ({
-		...match,
-	}));
-
-	if (!matches.length) return string;
-
-	const match = matches[0];
-	const numbers = match[0];
-	const words = converter.toWords(numbers);
-	const result = words + prepped.slice(match.index + numbers.length);
-
-	return replaceNumbersWithWords(result);
 };
 
 const getIconName = (name, style) => {
@@ -153,14 +113,10 @@ const extractIcons = async () => {
 };
 
 const run = async () => {
-	try {
-		await fs.emptyDir(outDir);
-		const url = await getReleaseAssetsURL();
-		await downloadSourceZip(url);
-		await extractIcons();
-	} catch (err) {
-		console.log(err);
-	}
+	await fs.emptyDir(outDir);
+	const url = await getZipBallUrl();
+	await downloadSourceZip(url);
+	await extractIcons();
 };
 
 run();
