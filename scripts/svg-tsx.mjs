@@ -85,15 +85,15 @@ const cleanPaths = data => {
 			{ name: "removeStyleElement" },
 			{ name: "removeScriptElement" },
 			{ name: "removeEmptyContainers" },
-			removeClipPath,
-			scalePaths(960, iconSize),
-			resetViewBox(iconSize),
-			translatePaths({ x: 0, y: -960 }, { x: 0, y: 0 }),
 		],
 	});
 
 	let { data: paths } = svgo.optimize(result.data, {
 		plugins: [
+			removeClipPath,
+			scalePaths(960, iconSize),
+			resetViewBox(iconSize),
+			translatePaths({ x: 0, y: -960 }, { x: 0, y: 0 }),
 			svgAsReactFragment({
 				onChildrenAsArray: () => (childrenAsArray = true),
 			}),
