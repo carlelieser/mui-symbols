@@ -11,6 +11,12 @@ import fg from "fast-glob";
 import fs from "fs-extra";
 import PQueue from "p-queue";
 import * as svgo from "svgo";
+import { camelCaseAttributes } from "./plugins/camel-case-attributes.mjs";
+import { removeClipPath } from "./plugins/remove-clip-path.mjs";
+import { svgAsReactFragment } from "./plugins/svg-as-react-fragment.mjs";
+import { resetViewBox } from "./plugins/reset-view-box.mjs";
+import { translatePaths } from "./plugins/translate-paths.mjs";
+import { scalePaths } from "./plugins/scale-paths.mjs";
 
 const ext = "svg";
 
@@ -21,17 +27,16 @@ const root = path.join(__dirname, "..");
 const templatePath = path.join(root, "template.js");
 const destPath = path.join(root, "src");
 
-const utilName = "create-svg-icon.js";
-const utilSourcePath = path.join(root, utilName);
-const utilDestPath = path.join(destPath, utilName);
-
 const queue = new PQueue({ concurrency: 8 });
+const iconSize = 48;
 
 const cleanPaths = data => {
 	const input = data
 		.replace(/ fill="#010101"/g, "")
 		.replace(/<rect fill="none" width="24" height="24"\/>/g, "")
 		.replace(/<rect id="SVGID_1_" width="24" height="24"\/>/g, "");
+
+	let childrenAsArray = false;
 
 	const result = svgo.optimize(input, {
 		floatPrecision: 4,
@@ -80,66 +85,21 @@ const cleanPaths = data => {
 			{ name: "removeStyleElement" },
 			{ name: "removeScriptElement" },
 			{ name: "removeEmptyContainers" },
+			removeClipPath,
+			scalePaths(960, iconSize),
+			resetViewBox(iconSize),
+			translatePaths({ x: 0, y: -960 }, { x: 0, y: 0 }),
 		],
 	});
 
-	let childrenAsArray = false;
-	const jsxResult = svgo.optimize(result.data, {
+	let { data: paths } = svgo.optimize(result.data, {
 		plugins: [
-			{
-				name: "svgAsReactFragment",
-				fn: () => {
-					return {
-						root: {
-							enter(root) {
-								const [svg, ...rootChildren] = root.children;
-								if (rootChildren.length > 0) {
-									throw new Error(
-										"Expected a single child of the root"
-									);
-								}
-								if (
-									svg.type !== "element" ||
-									svg.name !== "svg"
-								) {
-									throw new Error(
-										"Expected an svg element as the root child"
-									);
-								}
-
-								if (svg.children.length > 1) {
-									childrenAsArray = true;
-									svg.children.forEach((svgChild, index) => {
-										svgChild.attributes.key = index;
-										svgChild.name = `SVGChild:${svgChild.name}`;
-									});
-								}
-
-								root.children = svg.children;
-							},
-						},
-					};
-				},
-			},
+			svgAsReactFragment({
+				onChildrenAsArray: () => (childrenAsArray = true),
+			}),
+			camelCaseAttributes,
 		],
 	});
-
-	let paths = jsxResult.data
-		.replace(/"\/>/g, '" />')
-		.replace(/fill-opacity=/g, "fillOpacity=")
-		.replace(/xlink:href=/g, "xlinkHref=")
-		.replace(/clip-rule=/g, "clipRule=")
-		.replace(/fill-rule=/g, "fillRule=")
-		.replace(/ clip-path=".+?"/g, "")
-		.replace(/<clipPath.+?<\/clipPath>/g, "");
-
-	const size = 960;
-	const scale = Number(24 / size).toFixed(4);
-	paths = paths.replace('clipPath="url(#b)" ', "");
-	paths = paths.replace(
-		/<path /g,
-		`<path transform="scale(${scale}, ${scale})" `
-	);
 
 	if (childrenAsArray) {
 		const pathsCommaSeparated = paths
@@ -147,6 +107,7 @@ const cleanPaths = data => {
 			.replace(/<\/SVGChild:(\w+)>/g, "</$1>,");
 		paths = `[${pathsCommaSeparated}]`;
 	}
+
 	paths = paths.replace(/SVGChild:/g, "");
 
 	return paths;
@@ -185,13 +146,10 @@ const generateIndex = async () => {
 
 const clean = () => fs.emptyDir(destPath);
 
-const copyUtil = () => fs.copy(utilSourcePath, utilDestPath);
-
 const run = async () => {
 	await clean();
 	await generateComponents();
 	await generateIndex();
-	await copyUtil();
 };
 
 run();
