@@ -1,3 +1,3 @@
-import { createSvgIcon } from '@mui/icons-material';
+import { createSvgIcon } from "@mui/material";
 
 export default createSvgIcon({{{paths}}}, '{{componentName}}');
