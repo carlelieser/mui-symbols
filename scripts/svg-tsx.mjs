@@ -138,8 +138,8 @@ const generateComponents = async () => {
 };
 
 const generateIndex = async () => {
-	const files = await getIconFiles();
-	const names = files.map(filePath => path.basename(filePath, `.${ext}`));
+	const files = await fg("src/*.tsx");
+	const names = files.map(filePath => path.basename(filePath, ".tsx"));
 	const content = names
 		.map(name => `export { default as ${name} } from "./${name}";`)
 		.join("\n");
