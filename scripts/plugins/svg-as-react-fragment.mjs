@@ -1,7 +1,4 @@
-export const svgAsReactFragment = ({
-									   onChildrenAsArray = () => {
-									   },
-								   }) => ({
+export const svgAsReactFragment = ({ onChildrenAsArray = () => {} }) => ({
 	name: "svgAsReactFragment",
 	fn: () => {
 		return {
@@ -10,17 +7,12 @@ export const svgAsReactFragment = ({
 					const [svg, ...rootChildren] = root.children;
 
 					if (rootChildren.length > 0) {
-						throw new Error(
-							"Expected a single child of the root",
-						);
+						throw new Error("Expected a single child of the root");
 					}
 
-					if (
-						svg.type !== "element" ||
-						svg.name !== "svg"
-					) {
+					if (svg.type !== "element" || svg.name !== "svg") {
 						throw new Error(
-							"Expected an svg element as the root child",
+							"Expected an svg element as the root child"
 						);
 					}
 
