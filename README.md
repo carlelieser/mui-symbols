@@ -1,5 +1,5 @@
 # MUI Symbols 
-A React icon library compatible with Material UI.
+A React icon library for [Material Symbols](https://github.com/marella/material-symbols) compatible with [Material UI](https://mui.com/).
 
 ## Installation
 ```bash
@@ -24,5 +24,4 @@ import AbcRoundedFill from "mui-symbols/AbcRoundedFill";
 // Icons with numerical names
 import TenK from "mui-symbols/TenK"; // Represents "10k"
 import SixtyFps from "mui-symbols/SixtyFps"; // Represents "60fps"
-
 ```
