@@ -119,6 +119,8 @@ const getIconFiles = () => fg(`icons/*.${ext}`);
 const getTemplate = () => fs.readFile(templatePath, { encoding: "utf-8" });
 
 const toTSX = async (filePath, name = path.basename(filePath, `.${ext}`)) => {
+	if (name.toLowerCase().includes(defaultStyle)) await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
+
 	const data = await fs.readFile(filePath, { encoding: "utf-8" });
 	const paths = cleanPaths(data);
 	const template = await getTemplate();
@@ -126,8 +128,6 @@ const toTSX = async (filePath, name = path.basename(filePath, `.${ext}`)) => {
 		.replace("{{{paths}}}", paths)
 		.replace("{{componentName}}", name);
 	const outPath = path.join(destPath, name + ".tsx");
-
-	if (name.toLowerCase().includes(defaultStyle)) await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
 
 	await fs.outputFile(outPath, content, { encoding: "utf-8" });
 };
