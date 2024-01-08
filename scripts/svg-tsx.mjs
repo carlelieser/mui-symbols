@@ -28,7 +28,8 @@ const templatePath = path.join(root, "template.js");
 const destPath = path.join(root, "src");
 
 const queue = new PQueue({ concurrency: 8 });
-const iconSize = 48;
+const iconSize = 24;
+const defaultStyle = "outlined";
 
 const cleanPaths = data => {
 	const input = data
@@ -117,8 +118,7 @@ const getIconFiles = () => fg(`icons/*.${ext}`);
 
 const getTemplate = () => fs.readFile(templatePath, { encoding: "utf-8" });
 
-const toTSX = async filePath => {
-	const name = path.basename(filePath, `.${ext}`);
+const toTSX = async (filePath, name = path.basename(filePath, `.${ext}`)) => {
 	const data = await fs.readFile(filePath, { encoding: "utf-8" });
 	const paths = cleanPaths(data);
 	const template = await getTemplate();
@@ -126,6 +126,9 @@ const toTSX = async filePath => {
 		.replace("{{{paths}}}", paths)
 		.replace("{{componentName}}", name);
 	const outPath = path.join(destPath, name + ".tsx");
+
+	if (name.toLowerCase().includes(defaultStyle)) await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
+
 	await fs.outputFile(outPath, content, { encoding: "utf-8" });
 };
 
