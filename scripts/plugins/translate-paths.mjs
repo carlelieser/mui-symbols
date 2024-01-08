@@ -18,7 +18,7 @@ export const translatePaths = ({ origin, move }) => ({
 						parentNode.attributes.transform = `${parentNode.attributes.transform ?? ""} translate(${
 							move.x
 						}, ${move.y})`.trim();
-						parentNode.attributes["transform-origin"] = `${origin.x} ${origin.y}`;
+						parentNode.attributes["origin"] = `${origin.x} ${origin.y}`;
 					}
 				},
 			},
