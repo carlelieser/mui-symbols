@@ -9,17 +9,20 @@ npm install mui-symbols
 ## Usage
 Use this library the same way you would use `@mui/icons-material`:
 ```typescript
-// Named imports
+// Named import
 import { Abc } from "mui-symbols";
 
-// Default imports
+// Default import
 import Abc from "mui-symbols/Abc";
 
-// With different icon styles
-import AbcOutlined from "mui-symbols/AbcOutlined"; // Outlined is the default style so this is the same as using "Abc"
+// Style variations
+import AbcOutlined from "mui-symbols/AbcOutlined"; // Same as "Abc"
 import AbcRounded from "mui-symbols/AbcRounded";
 import AbcSharp from "mui-symbols/AbcSharp";
-
-// With fill
 import AbcRoundedFill from "mui-symbols/AbcRoundedFill";
+
+// Icons with numerical names
+import TenK from "mui-symbols/TenK"; // Represents "10k"
+import SixtyFps from "mui-symbols/SixtyFps"; // Represents "60fps"
+
 ```
