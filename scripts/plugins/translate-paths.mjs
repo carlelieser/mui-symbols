@@ -1,7 +1,7 @@
 /**
  * Translates paths based on specified movement and origin coordinates.
  *
- * This function modifies the 'transform' and 'transform-origin' attributes of the parent node
+ * This function modifies the 'transform' and 'origin' attributes of the parent node
  * of SVG path elements to apply a translation effect.
  *
  * @param {Object} params - The parameters for the translation.
