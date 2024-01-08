@@ -144,6 +144,7 @@ const generateIndex = async () => {
 		.map(name => `export { default as ${name} } from "./${name}";`)
 		.join("\n");
 	const outPath = path.join(destPath, "index.ts");
+
 	await fs.outputFile(outPath, content, { encoding: "utf-8" });
 };
 
