@@ -16,8 +16,7 @@ import { replaceNumbersWithWords, toPascalCase } from "./utils.mjs";
 const argv = yargs(hideBin(process.argv))
 	.option("repo", {
 		alias: "r",
-		describe:
-			'GitHub repo to extract icons from, i.e "marella/material-symbols".',
+		describe: 'GitHub repo to extract icons from, i.e "marella/material-symbols".',
 		type: "string",
 	})
 	.option("output", {
@@ -27,14 +26,12 @@ const argv = yargs(hideBin(process.argv))
 	})
 	.option("extension", {
 		alias: "ext",
-		describe:
-			"The icon extension to match against. Only icons with this extension will be extracted.",
+		describe: "The icon extension to match against. Only icons with this extension will be extracted.",
 		type: "string",
 	})
 	.option("sub-dir", {
 		alias: "s",
-		describe:
-			'The sub-directory within the repo where icons should be grabbed from. Default is "svg/400"',
+		describe: 'The sub-directory within the repo where icons should be grabbed from. Default is "svg/400"',
 		type: "string",
 	}).argv;
 

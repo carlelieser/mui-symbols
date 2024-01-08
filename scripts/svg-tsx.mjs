@@ -14,9 +14,10 @@ import * as svgo from "svgo";
 import { camelCaseAttributes } from "./plugins/camel-case-attributes.mjs";
 import { removeClipPath } from "./plugins/remove-clip-path.mjs";
 import { svgAsReactFragment } from "./plugins/svg-as-react-fragment.mjs";
-import { resetViewBox } from "./plugins/reset-view-box.mjs";
+import { setViewBox } from "./plugins/set-view-box.mjs";
 import { translatePaths } from "./plugins/translate-paths.mjs";
 import { scalePaths } from "./plugins/scale-paths.mjs";
+import { groupPaths } from "./plugins/group-paths.mjs";
 
 const ext = "svg";
 
@@ -92,9 +93,24 @@ const cleanPaths = data => {
 	let { data: paths } = svgo.optimize(result.data, {
 		plugins: [
 			removeClipPath,
-			scalePaths(960, iconSize),
-			resetViewBox(iconSize),
-			translatePaths({ x: 0, y: -960 }, { x: 0, y: 0 }),
+			groupPaths,
+			scalePaths(iconSize / 960),
+			translatePaths({
+				origin: {
+					x: 0,
+					y: -960,
+				},
+				move: {
+					x: 0,
+					y: 960,
+				},
+			}),
+			setViewBox({
+				x: 0,
+				y: 0,
+				width: iconSize,
+				height: iconSize,
+			}),
 			svgAsReactFragment({
 				onChildrenAsArray: () => (childrenAsArray = true),
 			}),
@@ -103,9 +119,7 @@ const cleanPaths = data => {
 	});
 
 	if (childrenAsArray) {
-		const pathsCommaSeparated = paths
-			.replace(/key="\d+" \/>/g, "$&,")
-			.replace(/<\/SVGChild:(\w+)>/g, "</$1>,");
+		const pathsCommaSeparated = paths.replace(/key="\d+" \/>/g, "$&,").replace(/<\/SVGChild:(\w+)>/g, "</$1>,");
 		paths = `[${pathsCommaSeparated}]`;
 	}
 
@@ -119,14 +133,13 @@ const getIconFiles = () => fg(`icons/*.${ext}`);
 const getTemplate = () => fs.readFile(templatePath, { encoding: "utf-8" });
 
 const toTSX = async (filePath, name = path.basename(filePath, `.${ext}`)) => {
-	if (name.toLowerCase().includes(defaultStyle)) await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
+	if (name.toLowerCase().includes(defaultStyle))
+		await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
 
 	const data = await fs.readFile(filePath, { encoding: "utf-8" });
 	const paths = cleanPaths(data);
 	const template = await getTemplate();
-	const content = template
-		.replace("{{{paths}}}", paths)
-		.replace("{{componentName}}", name);
+	const content = template.replace("{{{paths}}}", paths).replace("{{componentName}}", name);
 	const outPath = path.join(destPath, name + ".tsx");
 
 	await fs.outputFile(outPath, content, { encoding: "utf-8" });
@@ -140,9 +153,7 @@ const generateComponents = async () => {
 const generateIndex = async () => {
 	const files = await fg("src/*.tsx");
 	const names = files.map(filePath => path.basename(filePath, ".tsx"));
-	const content = names
-		.map(name => `export { default as ${name} } from "./${name}";`)
-		.join("\n");
+	const content = names.map(name => `export { default as ${name} } from "./${name}";`).join("\n");
 	const outPath = path.join(destPath, "index.ts");
 
 	await fs.outputFile(outPath, content, { encoding: "utf-8" });

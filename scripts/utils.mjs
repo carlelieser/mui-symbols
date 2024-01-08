@@ -1,7 +1,6 @@
 import converter from "number-to-words";
 
-export const capitalize = string =>
-	string.charAt(0).toUpperCase() + string.slice(1);
+export const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
 
 export const toCamelCase = string =>
 	string.charAt(0).toLowerCase() +
@@ -23,10 +22,7 @@ export const capitalizeFirstLetterAfterNumberGroup = string => {
 	for (let i = 0; i < chars.length; i++) {
 		const char = chars[i];
 		if (i === 0) continue;
-		if (
-			Number.isNaN(Number(char)) &&
-			!Number.isNaN(Number(chars?.[i - 1]))
-		) {
+		if (Number.isNaN(Number(char)) && !Number.isNaN(Number(chars?.[i - 1]))) {
 			chars[i] = char.toUpperCase();
 		}
 	}
@@ -47,23 +43,4 @@ export const replaceNumbersWithWords = string => {
 	const result = words + prepped.slice(match.index + numbers.length);
 
 	return replaceNumbersWithWords(result);
-};
-
-export const parseViewBox = (viewBox, callback) => {
-	if (!viewBox)
-		throw new Error("Failed to parse viewBox. None was provided.");
-	const values = viewBox.split(/\s/g).map(Number);
-	const [x, y] = values.slice(0, 2);
-	const [width, height] = values.slice(2);
-	callback({
-		x,
-		y,
-		width,
-		height,
-	});
-};
-
-export const tryGetViewBox = (viewBox, callback) => {
-	if (!viewBox) throw new Error("Missing viewBox attribute in root.");
-	callback(viewBox);
 };

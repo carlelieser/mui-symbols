@@ -11,9 +11,7 @@ export const svgAsReactFragment = ({ onChildrenAsArray = () => {} }) => ({
 					}
 
 					if (svg.type !== "element" || svg.name !== "svg") {
-						throw new Error(
-							"Expected an svg element as the root child"
-						);
+						throw new Error("Expected an svg element as the root child");
 					}
 
 					if (svg.children.length > 1) {

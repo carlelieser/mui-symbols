@@ -1,29 +1,31 @@
-import parse from "parse-svg-path";
-import translate from "translate-svg-path";
-import serialize from "serialize-svg-path";
-
-export const translatePaths = (from, to) => ({
+/**
+ * Translates the paths based on specified movement and origin coordinates.
+ *
+ * This function modifies the 'transform' and 'transform-origin' attributes of the parent node
+ * of SVG path elements to apply a translation effect. It only affects path elements that have
+ * a defined 'd' attribute (the draw path command).
+ *
+ * @param {Object} params - The parameters for the translation.
+ * @param {Object} params.origin - The origin point for the translation, with 'x' and 'y' properties.
+ * @param {Object} params.move - The translation vector, with 'x' and 'y' properties indicating the movement.
+ */
+export const translatePaths = ({ origin, move }) => ({
 	name: "translatePaths",
-	description:
-		"Shift all paths to new positions, determined by the provided coordinates, starting from the initial 'from' value.",
 	fn: () => {
 		let deltaX, deltaY;
 		return {
 			element: {
-				enter: node => {
-					if (node.name === "svg") {
-						deltaX = to.x - from.x;
-						deltaY = to.y - from.y;
-					}
+				enter: (node, parentNode) => {
 					if (node.name === "path") {
 						const d = node.attributes.d;
 
 						if (!d) return;
 
 						if (deltaX || deltaY) {
-							const path = parse(d);
-							const translated = translate(path, deltaX, deltaY);
-							node.attributes.d = serialize(translated);
+							parentNode.attributes.transform = `${parentNode.attributes.transform ?? ""} translate(${
+								move.x
+							}, ${move.y})`.trim();
+							parentNode.attributes["transform-origin"] = `${origin.x} ${origin.y}`;
 						}
 					}
 				},

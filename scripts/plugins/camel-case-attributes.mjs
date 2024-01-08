@@ -1,8 +1,11 @@
 import { toCamelCase } from "../utils.mjs";
 
+/**
+ * Converts all attribute names to camelCase.
+ *
+ */
 export const camelCaseAttributes = {
 	name: "camelCaseAttributes",
-	description: "Converts attribute names to camel case.",
 	fn: () => {
 		return {
 			element: {
