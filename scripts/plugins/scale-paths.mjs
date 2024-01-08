@@ -1,6 +1,6 @@
 export const scalePaths = (from, to) => ({
 	name: "scalePaths",
-	description: "Adjust path sizes based on the ratio of the provided values.",
+	description: "Scale paths based on the ratio of the provided values.",
 	fn: () => {
 		let scale;
 		return {

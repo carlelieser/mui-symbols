@@ -5,7 +5,7 @@ import serialize from "serialize-svg-path";
 export const translatePaths = (from, to) => ({
 	name: "translatePaths",
 	description:
-		"Translate all paths to the provided coordinates relative to the from value.",
+		"Shift all paths to new positions, determined by the provided coordinates, starting from the initial 'from' value.",
 	fn: () => {
 		let deltaX, deltaY;
 		return {
