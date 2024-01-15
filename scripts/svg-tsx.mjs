@@ -18,6 +18,15 @@ import { setViewBox } from "./plugins/set-view-box.mjs";
 import { translatePaths } from "./plugins/translate-paths.mjs";
 import { scalePaths } from "./plugins/scale-paths.mjs";
 import { groupPaths } from "./plugins/group-paths.mjs";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+
+const argv = yargs(hideBin(process.argv)).option("style", {
+	alias: "s",
+	describe:
+		"Sets the default style for the components. Choose from 'outlined', 'rounded', 'sharp'. You can optionally append 'filled' as well to target the filled styles, i.e 'roundedfilled'. Components will be named without including this style in the name. Default is 'outlinedfilled'.",
+	type: "string",
+}).argv;
 
 const ext = "svg";
 
@@ -30,7 +39,7 @@ const destPath = path.join(root, "src");
 
 const queue = new PQueue({ concurrency: 8 });
 const iconSize = 24;
-const defaultStyle = "outlined";
+const defaultStyle = argv.style ?? "outlinedfilled";
 
 const cleanPaths = data => {
 	const input = data
@@ -132,9 +141,17 @@ const getIconFiles = () => fg(`icons/*.${ext}`);
 
 const getTemplate = () => fs.readFile(templatePath, { encoding: "utf-8" });
 
-const toTSX = async (filePath, name = path.basename(filePath, `.${ext}`)) => {
-	if (name.toLowerCase().includes(defaultStyle))
+const createComponentWithDefaultStyle = async (filePath, name) => {
+	const normalizedDefaultStyle = defaultStyle.toLowerCase();
+	const normalizedName = name.toLowerCase();
+	const shouldCreate = normalizedName.includes(normalizedDefaultStyle);
+
+	if (shouldCreate)
 		await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
+}
+
+const toTSX = async (filePath, name = path.basename(filePath, `.${ext}`)) => {
+	await createComponentWithDefaultStyle(filePath, name);
 
 	const data = await fs.readFile(filePath, { encoding: "utf-8" });
 	const paths = cleanPaths(data);
