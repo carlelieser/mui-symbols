@@ -24,7 +24,7 @@ import { hideBin } from "yargs/helpers";
 const argv = yargs(hideBin(process.argv)).option("style", {
 	alias: "s",
 	describe:
-		"Sets the default style for the components. Choose from 'outlined', 'rounded', 'sharp'. Components will be named without including this style in the name. Default is 'outlined'.",
+		"Sets the default style for the components. Choose from 'outlined', 'rounded', 'sharp'. Additionally, 'filled' can be appended to specify the filled alternative of a style as the default, i.e 'roundedfilled'. Components will be named without including this style in the name. Default is 'outlinedfilled'.",
 	type: "string",
 }).argv;
 
@@ -39,7 +39,7 @@ const destPath = path.join(root, "src");
 
 const queue = new PQueue({ concurrency: 8 });
 const iconSize = 24;
-const defaultStyle = argv.style ?? "outlined";
+const defaultStyle = argv.style ?? "outlinedfilled";
 
 const cleanPaths = data => {
 	const input = data
@@ -144,7 +144,7 @@ const getTemplate = () => fs.readFile(templatePath, { encoding: "utf-8" });
 const createComponentWithDefaultStyle = async (filePath, name) => {
 	const normalizedDefaultStyle = defaultStyle.toLowerCase();
 	const normalizedName = name.toLowerCase();
-	const shouldCreate = normalizedName.includes(normalizedDefaultStyle) || normalizedName.includes(normalizedDefaultStyle + "filled");
+	const shouldCreate = normalizedName.includes(normalizedDefaultStyle);
 
 	if (shouldCreate)
 		await toTSX(filePath, name.replace(new RegExp(defaultStyle, "gi"), ""));
